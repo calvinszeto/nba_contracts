@@ -19,6 +19,14 @@ More advanced stats can be found on www.82games.com
 
 ## Thoughts
 Assumption: Contracts are dealt based on supply and demand.
+
+Another Convenient Assumption: If a team needs a player, it will affect the market,
+    no matter their current financial situation (i.e. don't worry about cap space).
+
+Yet Another Convenient Assumption: CBA changes have no additional affect on contracts 
+    outside of the affect on Supply and Demand.
+    
+The general structure:
 1. Classify a player by position and skill.
 2. (To determine Supply)Look at the depth of free agency of similar players.
 3. (To determine Demand)Look at depth of teams which require that class of player.
@@ -31,9 +39,3 @@ Therefore, the most difficult parts are part (1) and part (3):
 * How do we classify players?
 * How do we determine what players a team wants?
 Those two questions practically require their own research papers...
-
-Another Convenient Assumption: If a team needs a player, it will affect the market,
-    no matter their current financial situation (i.e. don't worry about cap space).
-
-Another Convenient Assumption: CBA changes have no additional affect on contracts 
-    outside of the affect on Supply and Demand.
