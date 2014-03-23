@@ -39,3 +39,14 @@ Therefore, the most difficult parts are part (1) and part (3):
 * How do we classify players?
 * How do we determine what players a team wants?
 Those two questions practically require their own research papers...
+
+## Player Classification
+
+The simplest thing to do is not classify the players at all. Simply use all the classification features in the regression.
+This is not likely to give good results, but is worth doing when trying the regression model for the first time.
+
+Features to consider for classification:
+Box Score Statistics
+Advanced Statistics
+Age
+Injuries?
