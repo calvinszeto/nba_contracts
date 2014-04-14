@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Predicting NBA Contracts}
+\author{Calvin Szeto}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Can we predict the contracts that NBA teams will give to a player in free agency? 
+That is the question my project aims to answer, first by gauging the market with clustering and classification algorithms, and then applying these market features on a regression model to determine the likely value of the contract.
+
+\section{Motivation}
+
+Every summer, the NBA receives a fresh crop of free agents - players whose contracts have ended in some form or another, and are now free to seek work elsewhere. 
+Some players are restricted free agents, meaning their team retains the right to match any offer the player receives from another team. Others have complete freedom.
+In any case, the market of free agents works like any other market; those players who are in high demand will receive high offers, and the players left over receive relatively lower offers.
+
+What makes the market interesting is that it changes every year. One year, there may be very few point guards available, and those who are free might be "overpaid" as a result. The next year, the crop of free agent guards may be plentiful, and the price will go down. Therefore, answering this question of how much players will cost could be helpful in planning out when to pick up players at the right price.
+
+Another use of the model would be for teams debating whether to sign a rookie extension or test free agency. The last year of a rookie contract is a tricky situation for a team, because there often hasn't been enough time to accurately evaluate the player in question. 
+However, if the team doesn't sign an early extension, they may risk losing the player to another team in restricted free agency if they receive a large deal.
+The ability to predict their free agency deal would benefit this decision.
+
+\section{Details}
+
+To estimate this player market, we first need to find some meaningful clustering of NBA players. There are many statistics to choose from, and running K-Means on box score or advanced statistics will likely give a decent clustering based on skillset and overall ability. Using this clustering, we should be able to determine the "supply" of a given cluster for a given free agency group.
+
+Next, we determine the "demand" of the cluster by counting the number of teams which do not already employ players of that cluster. Naturally, players which are rare should have a large demand, and those who belong in a larger cluster should have less demand.
+
+Finally, using these supply and demand features, we can create a regression model based on past contract data.
+
+\end{document}

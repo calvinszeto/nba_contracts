@@ -16,6 +16,7 @@ Can be found both on www.shamsports.com and www.nba.com.
 Box Score data can be found on www.basketball-reference.com.
 Some advanced stats can also be found there.
 More advanced stats can be found on www.82games.com
+### Physical data
 
 ## Thoughts
 Assumption: Contracts are dealt based on supply and demand.
