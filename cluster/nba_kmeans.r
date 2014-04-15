@@ -8,7 +8,8 @@
 max_clusters <- 50
 max_iterations <- 30
 
-nba_kmeans <- function(dat, id="Rk") {
+# Assumes that the ID variable is labeled "Rk"
+nba_kmeans <- function(dat) {
     # Lowest total distance so far
     best_total <- -1
     # Number of clusters that resulted in best score so far
@@ -16,22 +17,38 @@ nba_kmeans <- function(dat, id="Rk") {
     # Data frame that holds on to best clustering so far
     best_clustering <- NULL 
 
-    # Remove non-numeric columns to get a matrix
+    # Remove non-numeric columns to get a matrix (still a data frame)
     mat <- dat[ , sapply(dat,is.numeric) ]
     
     for (k in 1:max_clusters) {
-        # Keep in mind that the first column is the ID column
-        num_variables = dim(mat)[2] - 1
+        # TODO: Keep in mind that the first column is the ID column
+        num_rows = dim(mat)[1]
+        num_variables = dim(mat)[2]
         # Initialize cluster centers
+        centers <- data.frame(replicate(num_variables,rep(NA,num_rows)))
+        for (v in 1:num_variables) {
+            # Assuming the first column is the ID column
+            if (v == 1) {
+                vals <- mat[,1]
+            } else {
+                # We want to do each variable column so the random
+                # centers make some sense
+                vals <- runif(num_rows, min(mat[,v]), max(mat[,v]))
+            }
+            centers[v] <- vals
+        }
 
         for (i in 1:max_iterations) {
             # Set cluster variable for each row as the closest center  
+             
             # Recalculate cluster centers
+
         }
     }
     
     # Merge the clusters with the original dataset
-    return(merge(dat,best_clustering, by="Rk"))
+    return(list(dataset=merge(dat,best_clustering, by="Rk"),
+        num_clusters=best_num))
 }
 
 # row is the vector to be clustered
@@ -39,7 +56,6 @@ nba_kmeans <- function(dat, id="Rk") {
 euclidean_closest <- function(row, centers) {
     # TODO: Consider ID variable
     min_distance <- -1
-    total_distance <- 0
     best_cluster <- 0
     for (c in 1:dim(centers)[1]) {
         distance <- 0 
@@ -47,11 +63,12 @@ euclidean_closest <- function(row, centers) {
             distance = distance + (row[v] - centers[c,v]) ** num_variables
         }
         distance = distance ** (1/num_variables)
-        total_distance = total_distance + distance
         if (min_distance < 0 | distance < min_distance) {
             min_distance <- distance
             best_cluster <- c
         }
+        print(paste(c('center ',c,' has distance ',distance),collapse=""))
+        print(paste(c('min distance is ',min_distance),collapse=""))
     }
-    return(list(center=c, total=total_distance))
+    return(list(center=best_cluster, distance=min_distance))
 }
