@@ -53,13 +53,13 @@ nba_kmeans <- function(dat) {
 
 # row is the vector to be clustered
 # centers is the matrix of cluster centers
+# Remove the ID variable before using this function
 euclidean_closest <- function(row, centers) {
-    # TODO: Consider ID variable
     min_distance <- -1
     best_cluster <- 0
     for (c in 1:dim(centers)[1]) {
         distance <- 0 
-        for (v in 1:num_variables) {
+        for (v in 1:dim(centers)[2]) {
             distance = distance + (row[v] - centers[c,v]) ** num_variables
         }
         distance = distance ** (1/num_variables)
