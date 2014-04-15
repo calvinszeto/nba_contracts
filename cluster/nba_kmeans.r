@@ -21,7 +21,7 @@ nba_kmeans <- function(dat, id="Rk") {
     
     for (k in 1:max_clusters) {
         # Keep in mind that the first column is the ID column
-        num_variables = length(mat) - 1
+        num_variables = dim(mat)[2] - 1
         # Initialize cluster centers
 
         for (i in 1:max_iterations) {
@@ -40,7 +40,7 @@ euclidean_closest <- function(row, centers) {
     # TODO: Consider ID variable
     min_distance <- -1
     best_cluster <- 0
-    for (c in 1:length(centers[,1])) {
+    for (c in 1:dim(centers)[1]) {
         distance <- 0 
         for (v in 1:num_variables) {
             distance = distance + (row[v] - centers[c,v]) ** num_variables
