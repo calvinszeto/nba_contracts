@@ -9,8 +9,8 @@ max_clusters <- 50
 max_iterations <- 30
 
 nba_kmeans <- function(dat, id="Rk") {
-    # Lowest RMSE so far
-    best_rmse <- -1
+    # Lowest total distance so far
+    best_total <- -1
     # Number of clusters that resulted in best score so far
     best_num <- -1
     # Data frame that holds on to best clustering so far
@@ -39,6 +39,7 @@ nba_kmeans <- function(dat, id="Rk") {
 euclidean_closest <- function(row, centers) {
     # TODO: Consider ID variable
     min_distance <- -1
+    total_distance <- 0
     best_cluster <- 0
     for (c in 1:dim(centers)[1]) {
         distance <- 0 
@@ -46,10 +47,11 @@ euclidean_closest <- function(row, centers) {
             distance = distance + (row[v] - centers[c,v]) ** num_variables
         }
         distance = distance ** (1/num_variables)
+        total_distance = total_distance + distance
         if (min_distance < 0 | distance < min_distance) {
             min_distance <- distance
             best_cluster <- c
         }
     }
-    return(c)
+    return(list(center=c, total=total_distance))
 }
