@@ -67,8 +67,6 @@ euclidean_closest <- function(row, centers) {
             min_distance <- distance
             best_cluster <- c
         }
-        print(paste(c('center ',c,' has distance ',distance),collapse=""))
-        print(paste(c('min distance is ',min_distance),collapse=""))
     }
     return(list(center=best_cluster, distance=min_distance))
 }
