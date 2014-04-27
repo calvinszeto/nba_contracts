@@ -1,0 +1,58 @@
+
+TODO:
+1.
+    Priority now is to fix kmeans
+    Remove cosine similarity
+    KMeans should use SSE
+    Try different feature sets.
+    Try PCA.
+    Try KNN vs. KMeans.
+    Finish clustering before anything else. If all else fails, I can just turn in this part.
+2.
+    Scrapy Free Agency Data
+        2003
+            http://espn.go.com/espnw/news-commentary/article/1575042/2003-nba-free-agents
+            http://www.nba.com/transactions/freeagents2003_name.html
+            http://collegebasketballnews.scout.com/2/118877.html
+        2004
+            http://sports.espn.go.com/nba/news/story?id=1830779
+        2005
+            http://sports.espn.go.com/nba/news/story?id=2097450
+        2006
+            http://www.nba.com/transactions/movement2006_name.html
+            http://collegebasketballnews.scout.com/2/547449.html
+        2007
+            http://www.nba.com/transactions/movement2007_name.html
+        2008
+            http://www.nba.com/transactions/movement2008_name.html
+        2009
+        2010
+        2011
+        2012
+        2013
+        2014
+    Incredibly hard... do this part last
+3. 
+4.
+    (DONE)Scrapy the salary data
+    Join salary data
+5.
+    Regression Model
+
+
+* Finish k-means
+    Should numbers be scaled? Use cosine similarity??
+* Preprocess should create matrix for kmeans
+    Removing values such as Gm
+
+Other models:
+PCA + KNN?
+
+Timesheet:
+4:50
+6:55
+
+7:15
+9:00
+
+2:00

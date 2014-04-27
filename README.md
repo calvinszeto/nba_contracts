@@ -28,7 +28,7 @@ Yet Another Convenient Assumption: CBA changes have no additional affect on cont
     outside of the affect on Supply and Demand.
     
 The general structure:
-1. Classify a player by position and skill.
+1. Cluster players by position and skill.
 2. (To determine Supply)Look at the depth of free agency of similar players.
 3. (To determine Demand)Look at depth of teams which require that class of player.
 4. Look at some kind of average of contract given to this class of player for a rough estimate.
@@ -37,13 +37,13 @@ The general structure:
 If we can do part (1), then parts (2) and (4) are straightforward. Part (5) can be done through trial and error.
 
 Therefore, the most difficult parts are part (1) and part (3):
-* How do we classify players?
+* How do we cluster players?
 * How do we determine what players a team wants?
 Those two questions practically require their own research papers...
 
-## Player Classification
+## Player Clustering
 
-The simplest thing to do is not classify the players at all. Simply use all the classification features in the regression.
+The simplest thing to do is not cluster the players at all. Simply use all the features in the regression.
 This is not likely to give good results, but is worth doing when trying the regression model for the first time.
 
 Features to consider for classification:
