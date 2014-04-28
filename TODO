@@ -1,13 +1,14 @@
+Try running kmeans vs. pca/knn to see whether you can get good boxplots
+Then try running regression on all variables
 
 TODO:
 1.
-    Priority now is to fix kmeans
-    Remove cosine similarity
+    (DONE)Priority now is to fix kmeans
+    (DONE)Remove cosine similarity
     KMeans should use SSE
     Try different feature sets.
     Try PCA.
     Try KNN vs. KMeans.
-    Finish clustering before anything else. If all else fails, I can just turn in this part.
 2.
     Scrapy Free Agency Data
         2003
@@ -15,8 +16,10 @@ TODO:
             http://www.nba.com/transactions/freeagents2003_name.html
             http://collegebasketballnews.scout.com/2/118877.html
         2004
+            http://www.nba.com/transactions/movement2004_name.html
             http://sports.espn.go.com/nba/news/story?id=1830779
         2005
+            http://www.nba.com/transactions/movement2005_name.html
             http://sports.espn.go.com/nba/news/story?id=2097450
         2006
             http://www.nba.com/transactions/movement2006_name.html
@@ -27,11 +30,17 @@ TODO:
             http://www.nba.com/transactions/movement2008_name.html
         2009
         2010
+            http://en.wikipedia.org/wiki/List_of_2010–11_NBA_season_transactions
+            http://www.nba.com/freeagents/2010/
         2011
+            http://www.nba.com/freeagents/2011/
         2012
+            http://www.nba.com/freeagents/2012/
         2013
+            http://www.nba.com/freeagents/2013/
         2014
-    Incredibly hard... do this part last
+            http://www.nba.com/freeagents/2014/
+    Just need list of transactions, make a large dataset
 3. 
 4.
     (DONE)Scrapy the salary data

@@ -1,7 +1,30 @@
-seasons_included <- c('03-04','04-05','05-06','06-07','07-08','08-09','09-10','10-11','11-12','12-13','13-14')
+seasons_included <- c(
+    '03-04','04-05','05-06','06-07','07-08','08-09'
+    ,'09-10','10-11','11-12','12-13','13-14')
 types_included <- c('per_game', 'per_minute', 'totals')
 
-# Returns a dataset from Basketball Reference (http://www.basketball-reference.com)
+for_regression <- function(season) {
+    totals <- bref_season(season, 'totals')
+    per_game <- bref_season(season, 'per_game')
+    per_minute <- bref_season(season, 'per_minute')
+    salaries <- salaries_by_season(season)
+    # Remove instances where players received multiple contracts
+    # With the max salary they received that season
+    without_dup <- salaries[!(salaries$player %in% salaries[duplicated(
+        salaries$player), "player"]),]
+    # For each duplicated row: find the one with the max salary 
+    dup <- unique(salaries[duplicated(salaries$player),"player"])
+    for(player in dup) {
+        max_salary <- max(salaries[salaries$player == player,"amount"])
+        max_row <- salaries[salaries$player == player & salaries$amount == max_salary,]
+        without_dup <- rbind(without_dup, max_row)
+    }
+    with_salaries <- merge(per_game, without_dup[,c("player", "amount")]
+        , by.x="Player", by.y="player", all.x=T, all.y=F)
+    return(with_salaries)
+}
+
+# Returns a dataset from Basketball Reference
 # for a particular season
 bref_season <- function(season, type='per_game') {
     if(!(season %in% seasons_included) | !(type %in% types_included)) {
@@ -12,15 +35,21 @@ bref_season <- function(season, type='per_game') {
     return(remove_duplicates(data))
 }
 
-for_cluster <- function(season) {
-    totals <- bref_season(season, 'totals')
-    per_game <- bref_season(season, 'per_game')
-    per_minute <- bref_season(season, 'per_minute')
-    return(data[, c("")])
-}
-
 # Removes split rows for players who played for multiple teams in the season
 remove_duplicates <- function(data) {
     movers <- data[data$Tm == 'TOT', 'Player'] 
     return(data[!(data$Player %in% movers) | (data$Tm == 'TOT'),])
+}
+
+# Returns salary data for a given season
+salaries_by_season <- function(season) {
+    if(!(season %in% seasons_included)) {
+        return(NULL)
+    }
+    salaries <- read.csv('./data/salaries.csv')
+    salaries$amount <- gsub('\\$', '', salaries$amount)
+    salaries$amount <- gsub(',', '', salaries$amount)
+    salaries$amount <- as.integer(salaries$amount)
+    salaries$season <- gsub('^(19|20)', '', salaries$season)
+    return(salaries[salaries$season == season,])
 }
