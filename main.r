@@ -13,12 +13,24 @@ contracts <- contracts()
 # Add cluster data to salary data
 df <- merge(clustered, contracts[,c("player", "amount", "season")]
     , by.x=c("Player", "season"), by.y=c("player", "season"), all=F)
-# Plot salary vs. cluster
+# Scale salaries by millions
 df$amount <- df$amount / 1000000
+# Add labels to cluster outliers
+# TODO: This is the worst piece of code. Fix it sometime.
+df$label <- rep(NA, dim(df)[1])
+for(row in 1:dim(df)[1]){
+    top_limit <- 1.5*IQR(df[df$cluster==df[row, "cluster"],"amount"]) +
+        quantile(df[df$cluster==df[row, "cluster"],"amount"])[4]
+    bottom_limit <- quantile(df[df$cluster==df[row, "cluster"],"amount"])[2] - 
+        1.5*IQR(df[df$cluster==df[row, "cluster"],"amount"])
+    df[row ,"label"] <- ifelse((df[row, "amount"]>top_limit | df[row, "amount"]<bottom_limit)
+    ,paste(as.character(df[row, "Player"]),df[row, "season"]),"")
+}
+# Plot salaries vs. cluster with boxplots
 plot <- ggplot(df, aes(factor(cluster), amount))
 plot <- plot + geom_boxplot() + labs(
     title="Salary Boxplots for Newly Signed Players"
     , x="Cluster", y="Post-Free-Agency Salary (millions)")
-plot <- plot + geom_text(aes(label=ifelse((amount>4*IQR(amount))
-    ,paste(as.character(Player), season),"")), hjust=0, vjust=-1,  size=4) 
+plot <- plot + geom_text(aes(label=as.character(label)), hjust=-0.05, vjust=0, size=4)
+    #, position=position_jitter(width=0.1, height=0.1)) 
 print(plot)

@@ -1,10 +1,8 @@
 Tuesday:
-* match by team also
-* do outliers per cluster, not total
-* expand plot to fit names
 * write poster
 
 Thursday and Friday:
+* try amounts matched with season before
 * Try running kmeans vs. pca/knn to see whether you can get good boxplots
 * Do linear regression w/ CV
 * Try previous clustering methods w/ different features
