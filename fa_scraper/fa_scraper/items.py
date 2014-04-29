@@ -8,3 +8,4 @@ from scrapy.item import Item, Field
 class FreeAgent(Item):
     Player = Field()
     Season = Field()
+    Team = Field()

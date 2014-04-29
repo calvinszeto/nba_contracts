@@ -13,8 +13,8 @@ contracts <- function() {
     salaries$season <- gsub('^(19|20)', '', salaries$season)
     # Cut out salaries which aren't in fa
     # TODO: There is a small bug with this line that is causing duplicates
-    salaries <- merge(salaries, fa, by.x=c("player", "season")
-        , by.y=c("Player", "Season"), all=F)
+    salaries <- merge(salaries, fa, by.x=c("player", "season", "team")
+        , by.y=c("Player", "Season", "Team"), all=F)
     return(salaries)
 }
 

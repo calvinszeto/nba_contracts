@@ -7,7 +7,7 @@ players <- for_regression()
 # Trim unwanted features
 players <- players[,c("Player", "season", "PTS", "TRB", "AST", "BLK", "STL", "FG", "FT", "X3P", "TOV")]
 # Run clustering on players
-clustered <- regular_kmeans_with_pca(players, 20)$data
+clustered <- regular_kmeans_with_pca(players, 13)$data
 # Create matrix of salary data for free agents from 06-07 to 12-13
 contracts <- contracts()
 # Add cluster data to salary data

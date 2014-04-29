@@ -29,38 +29,33 @@ class FaSpider(Spider):
             names = (sel.xpath(
                 '//h2/span[@id="Free_Agency"]/'
                 '../../table[@style="text-align:center"][1]/tr/td[1]'
-                '/a/text()')
-                .extract())
+                '/a'))
         elif season == "07-08":
             names = (sel.xpath(
                 '//h2/span[@id="Free_Agency"]/'
                 '../../table[@style="text-align:left"][1]/tr/td'
-                '/span/span/a/text()')
-                .extract())
+                '/span/span/a'))
         elif season == "08-09":
             names = (sel.xpath(
                 '//h3/span[@id="Free_agency"]/'
                 '../../table[@style="text-align:center"][2]/tr/td[@align="left"]'
-                '/a/text()')
-                .extract())
+                '/a'))
         elif season == "09-10":
             names = (sel.xpath(
                 '//h3/span[@id="Signed_from_free_agency"]/'
-                '../../table[@style="text-align: center"][1]/tr/td[1]/a/text()')
-                .extract())
+                '../../table[@style="text-align: center"][1]/tr/td[1]/a'))
         elif season == "10-11":
             names = (sel.xpath(
                 '//h3/span[@id="Signed_from_free_agency"]/'
-                '../../table[@style="text-align: center; width:80%"][1]/tr/td[1]/a/text()')
-                .extract())
+                '../../table[@style="text-align: center; width:80%"][1]/tr/td[1]/a)'))
         elif season == "11-12" or season == "12-13":
             names = (sel.xpath(
                 '//h3/span[@id="Free_agency"]/'
                 '../../table[@style="text-align:center"][2]/tr/td/'
-                'span/span/a/text()')
-                .extract())
+                'span/span/a'))
         for name in names:
             fa = FreeAgent()
-            fa['Player'] = name
+            fa['Player'] = name.xpath('text()').extract()
             fa['Season'] = season
+            fa['Team'] = name.xpath('../../../../td/a/text()')[0].extract()
             yield fa
