@@ -3,6 +3,19 @@ seasons_included <- c(
     ,'09-10','10-11','11-12','12-13','13-14')
 types_included <- c('per_game', 'per_minute', 'totals')
 
+contracts <- function() {
+    salaries <- read.csv('./data/salaries.csv')
+    fa <- read.csv('./data/fa.csv')
+    # Clean up salaries
+    salaries$amount <- gsub('\\$', '', salaries$amount)
+    salaries$amount <- gsub(',', '', salaries$amount)
+    salaries$amount <- as.integer(salaries$amount)
+    salaries$season <- gsub('^(19|20)', '', salaries$season)
+    # Cut out salaries which aren't in fa
+    salaries <- salaries[salaries$player %in% fa$Player & salaries$season %in% fa$Season,]
+    return(salaries)
+}
+
 for_regression <- function(season) {
     totals <- bref_season(season, 'totals')
     per_game <- bref_season(season, 'per_game')
