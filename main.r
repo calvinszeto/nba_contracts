@@ -1,3 +1,4 @@
+library('ggplot2')
 source("./preprocess/preprocess.r")
 source("./cluster/regular_kmeans.r")
 
@@ -6,17 +7,18 @@ players <- for_regression()
 # Trim unwanted features
 players <- players[,c("Player", "season", "PTS", "TRB", "AST", "BLK", "STL", "FG", "FT", "X3P", "TOV")]
 # Run clustering on players
-clustered <- regular_kmeans(players, 15)
+clustered <- regular_kmeans_with_pca(players, 20)$data
 # Create matrix of salary data for free agents from 06-07 to 12-13
 contracts <- contracts()
 # Add cluster data to salary data
 df <- merge(clustered, contracts[,c("player", "amount", "season")]
     , by.x=c("Player", "season"), by.y=c("player", "season"), all=F)
 # Plot salary vs. cluster
-num_clusters <- max(df$cluster)
-boxplot(df[df$cluster==1,"amount"], xlim=c(1, num_clusters)
-    , ylim=c(0, 23000000))
-for(cluster in 2:num_clusters) {
-    boxplot(df[df$cluster==cluster,"amount"], at=cluster, add=TRUE)
-}
-# TODO: Add labels to plot
+df$amount <- df$amount / 1000000
+plot <- ggplot(df, aes(factor(cluster), amount))
+plot <- plot + geom_boxplot() + labs(
+    title="Salary Boxplots for Newly Signed Players"
+    , x="Cluster", y="Post-Free-Agency Salary (millions)")
+plot <- plot + geom_text(aes(label=ifelse((amount>4*IQR(amount))
+    ,paste(as.character(Player), season),"")), hjust=0, vjust=-1,  size=4) 
+print(plot)

@@ -1,5 +1,8 @@
 Tuesday:
-* write report and poster
+* match by team also
+* do outliers per cluster, not total
+* expand plot to fit names
+* write poster
 
 Thursday and Friday:
 * Try running kmeans vs. pca/knn to see whether you can get good boxplots
@@ -7,5 +10,6 @@ Thursday and Friday:
 * Try previous clustering methods w/ different features
 * try elbow method for finding ideal # of clusters
 * write out main.r and setup.r and README
+* write report
 
 Make some predictions on this year's data: http://www.nba.com/freeagents/2014/
