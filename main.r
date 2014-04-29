@@ -7,7 +7,7 @@ players <- for_regression()
 # Trim unwanted features
 players <- players[,c("Player", "season", "PTS", "TRB", "AST", "BLK", "STL", "FG", "FT", "X3P", "TOV")]
 # Run clustering on players
-clustered <- regular_kmeans_with_pca(players, 13)$data
+clustered <- regular_kmeans(players, 13)$data
 # Create matrix of salary data for free agents from 06-07 to 12-13
 contracts <- contracts()
 # Add cluster data to salary data
@@ -24,7 +24,7 @@ for(row in 1:dim(df)[1]){
     bottom_limit <- quantile(df[df$cluster==df[row, "cluster"],"amount"])[2] - 
         1.5*IQR(df[df$cluster==df[row, "cluster"],"amount"])
     df[row ,"label"] <- ifelse((df[row, "amount"]>top_limit | df[row, "amount"]<bottom_limit)
-    ,paste(as.character(df[row, "Player"]),df[row, "season"]),"")
+        , paste(as.character(df[row, "Player"]), df[row, "season"]), "")
 }
 # Plot salaries vs. cluster with boxplots
 plot <- ggplot(df, aes(factor(cluster), amount))

@@ -47,7 +47,7 @@ class FaSpider(Spider):
         elif season == "10-11":
             names = (sel.xpath(
                 '//h3/span[@id="Signed_from_free_agency"]/'
-                '../../table[@style="text-align: center; width:80%"][1]/tr/td[1]/a)'))
+                '../../table[@style="text-align: center; width:80%"][1]/tr/td[1]/a'))
         elif season == "11-12" or season == "12-13":
             names = (sel.xpath(
                 '//h3/span[@id="Free_agency"]/'
@@ -57,5 +57,12 @@ class FaSpider(Spider):
             fa = FreeAgent()
             fa['Player'] = name.xpath('text()').extract()
             fa['Season'] = season
-            fa['Team'] = name.xpath('../../../../td/a/text()')[0].extract()
+            team = name.xpath('../../td/a/text()')
+            if team:
+                team = team[1].extract()
+            else:
+                team = name.xpath('../../../../td/a/text()')
+                if team:
+                    team = team[0].extract()
+            fa['Team'] =  team
             yield fa
