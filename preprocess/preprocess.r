@@ -12,14 +12,28 @@ contracts <- function() {
     salaries$amount <- as.integer(salaries$amount)
     salaries$season <- gsub('^(19|20)', '', salaries$season)
     # Cut out salaries which aren't in fa
-    salaries <- salaries[salaries$player %in% fa$Player & salaries$season %in% fa$Season,]
+    # TODO: There is a small bug with this line that is causing duplicates
+    salaries <- merge(salaries, fa, by.x=c("player", "season")
+        , by.y=c("Player", "Season"), all=F)
     return(salaries)
 }
 
-for_regression <- function(season) {
-    totals <- bref_season(season, 'totals')
-    per_game <- bref_season(season, 'per_game')
-    per_minute <- bref_season(season, 'per_minute')
+for_regression <- function() {
+    df <- data.frame()
+    for(season in seasons_included) {
+        per_game <- for_regression_by_season(season)
+        per_game$season <- season
+        if(length(df) == 0) {
+            df <- per_game
+        } else {
+            df <- rbind(df, per_game)
+        }
+    }
+    return(df)
+}
+
+for_regression_by_season <- function(season) {
+    per_game <- bref_season(season) 
     salaries <- salaries_by_season(season)
     # Remove instances where players received multiple contracts
     # With the max salary they received that season
@@ -34,7 +48,6 @@ for_regression <- function(season) {
     }
     with_salaries <- merge(per_game, without_dup[,c("player", "amount")]
         , by.x="Player", by.y="player", all.x=T, all.y=F)
-    return(with_salaries)
 }
 
 # Returns a dataset from Basketball Reference
