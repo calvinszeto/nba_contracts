@@ -1,0 +1,8 @@
+Problem:
+Can we predict the contracts that teams will give to a player in free agency?
+
+The goal of this project is to find meaningful relationships between player performance data and the salaries they earn. These relationships provide opportunities for basketball fans and professionals to enhance their understanding of the NBA player market. For a fan, the visualizations provide insight into whether their favorite players are truly overpaid or underpaid. For a professional, the models allow them to predict the market for certain players in certain years, and they can adjust their contract negotiations accordingly.
+
+To satisfy this goal, multiple algorithms are applied to scraped data and compared side-by-side. These algorithms include k-Means using both the Lloyd-Forgy method and Hartigan-Wong method, Spectral Clustering based on a k-Nearest-Neighbors graph, and k-Means with Principal Component Analysis. These clustering algorithms allow us to cluster players meaningfully, and to examine salary statistics for individual clusters. In addition, Multiple Linear Regression will allow us to train a model to directly predict future salaries.
+
+In this picture, players are clustered based on basic box score statistics: points, rebounds, assists, field goals, free throws, three pointers, blocks, steals, and turnovers. First, the dimensions are reduced using PCA, and then clusters are trained using k-Means. Finally, we trim the data to only include player seasons coming off a fresh contract, and visualize the new salaries using boxplots.

@@ -13,6 +13,8 @@ contracts <- contracts()
 # Add cluster data to salary data
 df <- merge(clustered, contracts[,c("player", "amount", "season")]
     , by.x=c("Player", "season"), by.y=c("player", "season"), all=F)
+# Remove duplicates
+df <- df[!duplicated(df[,-which(names(df) %in% c("Player", "season", "amount"))]),]
 # Scale salaries by millions
 df$amount <- df$amount / 1000000
 # Add labels to cluster outliers
@@ -31,6 +33,6 @@ plot <- ggplot(df, aes(factor(cluster), amount))
 plot <- plot + geom_boxplot() + labs(
     title="Salary Boxplots for Newly Signed Players"
     , x="Cluster", y="Post-Free-Agency Salary (millions)")
-plot <- plot + geom_text(aes(label=as.character(label)), hjust=-0.05, vjust=0, size=4)
+plot <- plot + geom_text(aes(label=as.character(label)), hjust=-0.05, vjust=0, size=6)
     #, position=position_jitter(width=0.1, height=0.1)) 
 print(plot)
