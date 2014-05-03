@@ -1,11 +1,11 @@
-total_clusters <- 30
+total_clusters <- 25
 
 find_optimal_k <- function(dat) {
     wss <- data.frame(clusters=rep(NA, total_clusters), SSE=rep(NA, total_clusters))
     for(c in 1:total_clusters) {
         wss[c,] <- c(c, regular_kmeans_with_pca(dat, c)$kmeans$tot.withinss)
     }
-    plot(wss$clusters , wss$SSE, type="b")
+    plot(wss$clusters , wss$SSE, type="b", xlab="Number of Clusters", ylab="SSE", main="SSE vs. Number of Clusters")
     return(wss)
 }
 

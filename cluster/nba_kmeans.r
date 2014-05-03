@@ -9,7 +9,7 @@ max_iterations <- 30
 num_clusters <- 15
 
 # Assumes that the ID variable is labeled "Rk"
-nba_kmeans <- function(dat) {
+nba_kmeans <- function(dat, num_clusters=15) {
     mat <- data.matrix(dat[,sapply(dat,is.numeric)])
     mat[is.na(mat)] <- 0
 

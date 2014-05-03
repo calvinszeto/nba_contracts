@@ -1,6 +1,7 @@
 library('ggplot2')
+library('kknn')
 source("./preprocess/preprocess.r")
-source("./cluster/regular_kmeans.r")
+source("./cluster/spectral_clustering.r")
 
 # Create matrix of per-game data for all players from season 06-07 to 13-14
 players <- for_regression()
@@ -8,7 +9,7 @@ players <- for_regression()
 players <- players[,c("Player", "season", "PTS", "TRB", "AST", "BLK", "STL", "FG", "FT", "X3P", "TOV")]
 # Run clustering on players
 # Change method here to try different algorithms
-clustered <- regular_kmeans(players, 15)$data
+clustered <- spectral_cluster(players, 15)$data
 # Create matrix of salary data for free agents from 06-07 to 12-13
 contracts <- contracts()
 # Add cluster data to salary data
@@ -36,4 +37,5 @@ plot <- plot + geom_boxplot() + labs(
     , x="Cluster", y="Post-Free-Agency Salary (millions)")
 plot <- plot + geom_text(aes(label=as.character(label)), hjust=-0.05, vjust=0, size=2)
     #, position=position_jitter(width=0.1, height=0.1)) 
-ggsave(filename="./plots/hw-kmeans.jpeg", plot=plot, width=6, height=4, units="in")
+ggsave(filename="./plots/sc.jpeg", plot=plot, width=6, height=4, units="in")
+

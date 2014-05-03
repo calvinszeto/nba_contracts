@@ -1,0 +1,74 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{brplayers}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Basketball-Reference}{B.-R.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BR1}
+  \strng{fullhash}{BR1}
+  \field{sortinit}{B}
+  \field{title}{NBA \& ABA Player Directory}
+  \verb{url}
+  \verb http://www.basketball-reference.com/players/
+  \endverb
+\endentry
+
+\entry{brseason}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Basketball-Reference}{B.-R.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BR1}
+  \strng{fullhash}{BR1}
+  \field{sortinit}{B}
+  \field{title}{NBA Stats}
+  \verb{url}
+  \verb http://www.basketball-reference.com/leagues/NBA_2014_per_game.html
+  \endverb
+\endentry
+
+\entry{wikipedia}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Wikipedia}{W.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{W1}
+  \strng{fullhash}{W1}
+  \field{sortinit}{W}
+  \field{title}{List of NBA Season Transactions}
+  \verb{url}
+  \verb http://en.wikipedia.org/wiki/List_of_2012-13_NBA_season_transactions#Si
+  \verb gned_from_free_agency
+  \endverb
+\endentry
+
+\lossort
+\endlossort
+
+\endinput
