@@ -1,3 +1,4 @@
+library('ggplot2')
 source("./preprocess/preprocess.r")
 source("./cluster/regular_kmeans.r")
 
@@ -28,7 +29,11 @@ for(row in 1:dim(df)[1]){
     df[row ,"label"] <- ifelse((df[row, "amount"]>top_limit | df[row, "amount"]<bottom_limit)
         , paste(as.character(df[row, "Player"]), df[row, "season"]), "")
 }
-
-for( c in 1:13) {
-    print(summary(df[df$cluster==c,]))
-}
+# Plot salaries vs. cluster with boxplots
+plot <- ggplot(df, aes(factor(cluster), amount))
+plot <- plot + geom_boxplot() + labs(
+    title="Salary Boxplots for Newly Signed Players"
+    , x="Cluster", y="Post-Free-Agency Salary (millions)")
+plot <- plot + geom_text(aes(label=as.character(label)), hjust=-0.05, vjust=0, size=2)
+    #, position=position_jitter(width=0.1, height=0.1)) 
+ggsave(filename="./plots/hw-kmeans.jpeg", plot=plot, width=6, height=4, units="in")
